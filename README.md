@@ -1,22 +1,22 @@
-# LG V30 (joan / H930) - KernelSU
+# LG V30 (joan / H930) - KernelSU Next
 
-Kernel with **KernelSU v0.9.5** (kprobe) for **LineageOS 22.2** (`lineage-22.2-20260524-nightly-joan`) on the LG V30 `joan` / H930.
+Kernel with **KernelSU Next v3.2.0 legacy** for **LineageOS 22.2** (`lineage-22.2-20260524-nightly-joan`) on the LG V30 `joan` / H930.
 
-This build targets the legacy **Linux 4.4.302 non-GKI** kernel. Do not update KernelSU Manager from the in-app update banner; stay on **v0.9.5 (11872)**.
+This build targets the legacy **Linux 4.4.302 non-GKI** kernel. The original KernelSU `v0.9.5` build is kept only as a rollback image; the current boot image uses KernelSU Next because upstream KernelSU no longer supports non-GKI kernels after `v0.9.5`.
 
 ## Files
 
-This repository contains scripts and patches to reproduce the KernelSU-enabled kernel source:
+This repository contains scripts and patches to reproduce the KernelSU Next-enabled kernel source:
 
-- `prepare-source.sh` - clones the LineageOS kernel, integrates KernelSU, and applies local patches
+- `prepare-source.sh` - clones the LineageOS kernel, integrates KernelSU Next, and applies local patches
 - `build-kernel.sh` - builds `Image.gz-dtb`
 - `repack-boot.sh` - repacks an official `boot.img` with the rebuilt kernel
 - `patches/` - small fixes needed for local clang builds
 
 The ready-to-flash image is not stored in git. GitHub releases should publish it as a release asset:
 
-- `kernelsu-boot.img`
-- SHA256: `085689d5441c831d2f33a71c387f69fd4b00af12fe4e4c99ed042737cf611375`
+- `kernelsu-next-boot.img`
+- SHA256: `80d4d430491ab54e271d60d579d6ea66f197ebc59ecdc5aba677fa7dffbf7b57`
 
 ## Flash
 
@@ -24,25 +24,25 @@ On the LG V30, classic bootloader fastboot may disconnect while transferring the
 
 ```bash
 adb reboot fastboot
-fastboot flash boot kernelsu-boot.img
+fastboot flash boot kernelsu-next-boot.img
 fastboot reboot
 ```
 
-KernelSU Manager: `v0.9.5 (11872)`.
+KernelSU Next Manager: `v3.2.0 (33129)`.
 
 ## Rollback
 
-Download the original `boot.img` from the same LineageOS build you are using and flash it through fastbootd:
+Flash the saved legacy KernelSU image or the original `boot.img` from the same LineageOS build through fastbootd:
 
 ```bash
 adb reboot fastboot
-fastboot flash boot boot.img
+fastboot flash boot kernelsu-boot-v0.9.5.img
 fastboot reboot
 ```
 
 ## Build
 
-Required tools: `clang`, `bc`, `make`, `mkbootimg`, `unpack_bootimg`, an AArch64 cross compiler, and an ARM32 EABI linker for compat vDSO.
+Required tools: `clang`, `bc`, `make`, `mkbootimg`, `unpack_bootimg`, an AArch64 cross compiler, and an ARM32 EABI linker such as `arm-none-eabi-binutils`.
 
 ```bash
 ./prepare-source.sh
@@ -54,5 +54,5 @@ cp /path/to/official/boot.img stock-boot.img
 ## Sources and Base
 
 - Kernel: `LineageOS/android_kernel_lge_msm8998` (`lineage-22.2`)
-- KernelSU: `tiann/KernelSU` tag `v0.9.5`
+- KernelSU Next: `KernelSU-Next/KernelSU-Next` branch `legacy` (`v3.2.0-legacy`)
 - Official base boot image: `lineage-22.2-20260524-nightly-joan`

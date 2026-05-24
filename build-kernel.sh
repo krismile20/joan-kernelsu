@@ -30,6 +30,8 @@ if [[ -z "${CROSS_COMPILE_ARM32:-}" ]]; then
     export CROSS_COMPILE_ARM32=arm-linux-gnueabi-
   elif command -v arm-linux-ld >/dev/null; then
     export CROSS_COMPILE_ARM32=arm-linux-
+  elif command -v arm-none-eabi-ld >/dev/null; then
+    export CROSS_COMPILE_ARM32=arm-none-eabi-
   else
     echo "Missing ARM32 linker for compat vDSO. Install an ARM EABI toolchain or set CROSS_COMPILE_ARM32." >&2
     exit 1

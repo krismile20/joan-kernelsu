@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STOCK_BOOT="${ROOT}/stock-boot.img"
 KERNEL_IMAGE="${ROOT}/kernel/out/arch/arm64/boot/Image.gz-dtb"
-OUT_BOOT="${ROOT}/kernelsu-boot.img"
+OUT_BOOT="${OUT_BOOT:-${ROOT}/kernelsu-next-boot.img}"
 WORK="${ROOT}/work/boot-repack"
 
 if [[ ! -f "${STOCK_BOOT}" ]]; then
