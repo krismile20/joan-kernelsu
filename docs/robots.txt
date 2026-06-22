@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tosterino.github.io/joan-kernelsu/sitemap.xml

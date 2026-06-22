@@ -1,4 +1,4 @@
-# LG V30 (joan / H930) - KernelSU Next Manual Hooks
+# LG V30 Root 2026 - KernelSU Next for joan / H930 LineageOS 22.2 Android 15
 
 KernelSU Next reference build for the **LG V30** (`joan` / H930, msm8998) running **LineageOS 22.2 / Android 15**.
 
@@ -10,6 +10,12 @@ Final tested state:
 - Zygisk Next operational in `zygote` and `zygote_secondary`
 - TrickyStore + FixIntegrity working
 - Play Integrity: **BASIC + DEVICE**
+
+## LG V30 Root / KernelSU
+
+This project is a modern LG V30 root method for `joan` / H930 on LineageOS 22.2 Android 15 using KernelSU Next.
+
+Useful search terms: LG V30 root 2026, LG V30 KernelSU, LG V30 LineageOS 22.2 root, joan KernelSU, H930 root Android 15, msm8998 KernelSU Next.
 
 ## Files
 
