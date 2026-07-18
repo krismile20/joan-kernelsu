@@ -13,31 +13,18 @@ index 966fb653..c27aa690 100644
 +# CONFIG_KSU_KPROBES_HOOK is not set
 +CONFIG_KPROBES=y
 +CONFIG_KPROBE_EVENTS=y
-diff --git a/arch/arm64/configs/lineageos_joan_defconfig b/arch/arm64/configs/lineageos_joan_defconfig
-index c27aa690..d27aa691 100644
---- a/arch/arm64/configs/lineageos_joan_defconfig
-+++ b/arch/arm64/configs/lineageos_joan_defconfig
-@@ -81,7 +81,7 @@ CONFIG_SCHED_MC=y
- # CONFIG_COMPAT_BRK is not set
- CONFIG_HARDENED_USERCOPY=y
- CONFIG_COMPAT=y
--CONFIG_COMPAT_VDSO=y
-+# CONFIG_COMPAT_VDSO is not set
- CONFIG_CROSS_COMPILE="aarch64-linux-gnu-"
- CONFIG_ARM64_SSBD=y
- CONFIG_DEFAULT_MMAP_MIN_ADDR=32768
 diff --git a/drivers/staging/qca-wifi-host-cmn/hif/src/ce/ce_main.c b/drivers/staging/qca-wifi-host-cmn/hif/src/ce/ce_main.c
 index 2f7bdecf..42b01567 100644
 --- a/drivers/staging/qca-wifi-host-cmn/hif/src/ce/ce_main.c
 +++ b/drivers/staging/qca-wifi-host-cmn/hif/src/ce/ce_main.c
 @@ -1750,7 +1750,7 @@ hif_send_head(struct hif_opaque_softc *hif_ctx,
- 
+
  	if (qdf_unlikely(ce_hdl == NULL)) {
  		HIF_ERROR("%s: error CE handle is null", __func__);
 -		return A_ERROR;
 +		return QDF_STATUS_E_FAILURE;
  	}
- 
+
  	QDF_NBUF_UPDATE_TX_PKT_COUNT(nbuf, QDF_NBUF_TX_PKT_HIF);
 diff --git a/drivers/staging/qcacld-3.0/Kbuild b/drivers/staging/qcacld-3.0/Kbuild
 index 36419dec..71232608 100644
@@ -49,19 +36,19 @@ index 36419dec..71232608 100644
  		-Werror\
 +		-Wno-error=implicit-enum-enum-cast \
  		-D__linux__
- 
+
  cppflags-$(CONFIG_PTT_SOCK_SVC_ENABLE) += -DPTT_SOCK_SVC_ENABLE
 diff --git a/drivers/staging/qcacld-3.0/core/dp/htt/htt_h2t.c b/drivers/staging/qcacld-3.0/core/dp/htt/htt_h2t.c
 index b2ca2424..43cf3501 100644
 --- a/drivers/staging/qcacld-3.0/core/dp/htt/htt_h2t.c
 +++ b/drivers/staging/qcacld-3.0/core/dp/htt/htt_h2t.c
 @@ -616,7 +616,7 @@ htt_h2t_rx_ring_cfg_msg_hl(struct htt_pdev_t *pdev)
- 
+
  	pkt = htt_htc_pkt_alloc(pdev);
  	if (!pkt)
 -		return A_ERROR; /* failure */
 +		return QDF_STATUS_E_FAILURE; /* failure */
- 
+
  	/*
  	 * show that this is not a tx frame download
 @@ -632,7 +632,7 @@ htt_h2t_rx_ring_cfg_msg_hl(struct htt_pdev_t *pdev)
